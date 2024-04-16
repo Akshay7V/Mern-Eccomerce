@@ -11,7 +11,7 @@ export default function Header() {
             <div className="w-1/3 ml-auto flex justify-between items-center font-semibold">
                 <Link to={'/'} >Home</Link>
                 <Link to={'/aboutus'} >About</Link>
-                <Link to={'/contactus'} >Contact</Link>
+                <Link to={'/cart'} >Cart</Link>
                 <Link to={'/signin'} >Log In</Link>
             </div>
         </div>
