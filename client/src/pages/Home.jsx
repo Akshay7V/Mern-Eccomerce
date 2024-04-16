@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <div className="">
       <Header />
-      <div className='text-3xl text-center'>Home Page</div>
+      <div className='h-screen w-screen text-3xl text-center'>Home Page</div>
       <Footer />
     </div>
   )

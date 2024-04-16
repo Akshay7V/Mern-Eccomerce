@@ -3,10 +3,12 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
     return (
-        <div className="absolute bottom-0 h-50 w-screen p-5 bg-slate-400">
-            <div className="flex">
-                <Link className='text-2xl my-auto font-semibold' to={'/'}>Eccomerce</Link>
-                <div className="mx-auto w-3/4 grid grid-cols-3 grid-rows-4 gap-2 font-semibold">
+        <footer className="max-w-full mt-auto p-5 bg-slate-400">
+            <div className="container m-auto flex flex-col lg:flex-row items-center justify-between">
+                <div className="text-2xl my-auto font-semibold">
+                    <Link to={'/'}>Ecommerce</Link>
+                </div>
+                <nav className="w-full lg:w-3/4 grid grid-cols-3 grid-rows-4 gap-2 font-semibold">
                     <Link to={'/'}>Home</Link>
                     <Link to={'/'}>Orders</Link>
                     <Link to={'/'}>Track Orders</Link>
@@ -16,12 +18,12 @@ export default function Footer() {
                     <Link to={'/'}>Profile</Link>
                     <Link to={'/'}>Settings</Link>
                     <Link to={'/'}>Customer Care</Link>
-                </div>
+                </nav>
                 <div className="flex flex-col gap-2">
                     <p className='font-semibold mx-auto'>Subscribe To Our Mail</p>
                     <input className='p-2 rounded-md' type="email" placeholder='abc@mail.com'/>
                 </div>
             </div>
-        </div>
+        </footer>
     )
 }

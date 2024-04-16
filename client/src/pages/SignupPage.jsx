@@ -6,9 +6,11 @@ import Footer from '../components/Footer'
 export default function SinginPage() {
   return (
     <div>
-        <Header/>
-        <Signup/>
-        <Footer/>
+      <Header />
+      <div className="h-screen w-screen">
+        <Signup />
+      </div>
+      <Footer />
     </div>
   )
 }
