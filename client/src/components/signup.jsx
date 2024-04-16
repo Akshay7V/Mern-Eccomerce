@@ -10,5 +10,5 @@ export default function Signup() {
       <button className='w-full py-2 px-1 bg-black text-white rounded-md' type='submit'>Sign Up</button>
       <p className='text-center'>Already have an account? <Link className='font-semibold' to={'/signin'}>Sign In</Link></p>
     </div>
-  )
+  );
 }
