@@ -1,6 +1,6 @@
 import React from 'react'
 import Header from '../components/Header'
-import Signin from '../components/signin'
+import Signin from '../components/Signin'
 import Footer from '../components/Footer'
 
 export default function SinginPage() {

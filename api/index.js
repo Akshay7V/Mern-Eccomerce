@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from 'dotenv';
 import mongoose from "mongoose";
 import userRouter from './routes/user.route.js'
+import adminRouter from './routes/admin.route.js'
 
 const port = 3000;
 const app = express();
@@ -9,7 +10,7 @@ const app = express();
 dotenv.config();
 
 app.listen(port, () => {
-    console.log(`app listing at port ${port}`);
+    console.log(`App running at port ${port}`);
 });
 
 mongoose.connect(process.env.MONGODB).then(() => {
@@ -20,3 +21,4 @@ mongoose.connect(process.env.MONGODB).then(() => {
 
 app.use(express.json());
 app.use('/api/user',userRouter);
+app.use('/api/admin',adminRouter);

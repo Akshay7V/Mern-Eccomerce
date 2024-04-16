@@ -44,7 +44,11 @@ export const signIn = async (req, res) => {
     }
 
     const { email: mail, _id: id } = user;
-    res.status(200).json({ email: mail, id });
+    const token = jwt.sign({ id: user._id, mail }, process.env.JWT_SECRET);
+    res
+      .status(200)
+      .cookie("access_token", token, { httpOnly: true })
+      .json({ email: mail, id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -70,7 +74,11 @@ export const adminSignIn = async (req, res) => {
     }
 
     const { email: mail, _id: id } = user;
-    res.status(200).json({ email: mail, id });
+    const token = jwt.sign({ id: user._id, mail }, process.env.JWT_SECRET);
+    res
+      .status(200)
+      .cookie("access_token", token, { httpOnly: true })
+      .json({ email: mail, id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
