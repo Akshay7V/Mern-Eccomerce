@@ -3,8 +3,8 @@ import { Link } from 'react-router-dom'
 
 export default function Footer() {
     return (
-        <footer className="max-w-full mt-auto p-5 bg-slate-400">
-            <div className="container m-auto flex flex-col lg:flex-row items-center justify-between">
+        <footer className="max-w-full h-60 mt-auto p-5 bg-slate-400">
+            <div className="container my-10 flex flex-col lg:flex-row items-center justify-between">
                 <div className="text-2xl my-auto font-semibold">
                     <Link to={'/'}>Ecommerce</Link>
                 </div>

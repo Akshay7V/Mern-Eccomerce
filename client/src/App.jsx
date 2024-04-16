@@ -6,7 +6,7 @@ import SignupPage from './pages/SignupPage.jsx'
 
 export default function App() {
   return (
-    <div className='h-screen w-screen'>
+    <div className='overflow-x-hidden'>
       <BrowserRouter>
         <Routes>
           <Route path='/' element={<Home/>} />
