@@ -27,3 +27,15 @@ export const addProduct = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const getAllProducts = async (req, res) => {
+  try {
+    const products = await Product.find();
+    const totalProducts = products.length;
+    
+    res.json({ products, totalProducts });
+} catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
