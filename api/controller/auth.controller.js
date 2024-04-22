@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+import { Cart } from "../models/cart.model.js";
 
 export const signUp = async (req, res) => {
   const { email, password } = req.body;
@@ -17,6 +18,7 @@ export const signUp = async (req, res) => {
 
     const newUser = await User.create({ email, password });
     const { email: mail, _id: id } = newUser;
+    const userCart = await Cart.create({ userId: id });
 
     res.status(201).json({ email: mail, id });
   } catch (error) {

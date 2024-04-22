@@ -28,8 +28,6 @@ export default function Home() {
     getAllProducts();
   }, []);
 
-  console.log(products.products);
-
   return (
     <div>
       <Header />

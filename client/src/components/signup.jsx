@@ -18,7 +18,7 @@ export default function Signup() {
       if (res.ok) {
         const data = res.json();
         console.log(data);
-        window.location.href = '/'; // Redirect to the '/' route
+        window.location.href = '/signin'; // Redirect to the '/signin' route
       } else {
         console.error("Error ", await res.json());
       }

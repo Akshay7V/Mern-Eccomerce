@@ -4,6 +4,7 @@ import Home from "./pages/HomePage.jsx";
 import SinginPage from "./pages/SinginPage.jsx";
 import SignupPage from "./pages/SignupPage.jsx";
 import AdminSigninPage from "./pages/AdminSigninPage.jsx";
+import CartPage from "./pages/CartPage.jsx";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
           <Route path="/signup" element={<SignupPage />} />
           <Route path="/signin" element={<SinginPage />} />
           <Route path="/admin/signin" element={<AdminSigninPage />} />
+          <Route path="/cart" element={<CartPage />} />
         </Routes>
       </BrowserRouter>
     </div>
