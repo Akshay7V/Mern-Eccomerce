@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, redirect } from 'react-router-dom'
 
 export default function Signin() {
   const [email, setEmail] = useState();
@@ -14,13 +14,20 @@ export default function Signin() {
         },
         method: 'POST',
         body: JSON.stringify({ email, password })
-      })
-      const data = res.json();
+      });
+      
+      const data = await res.json(); // Await the JSON parsing
+      
+      if(res.ok){
+        // Redirect only if the response is OK
+        window.location.href = '/'; // Redirect to the '/' route
+      }
       console.log(data);
     } catch (error) {
       console.log(error);
     }
-  }
+}
+
   return (
     <div className="w-screen flex justify-center items-center">
       <div className='h-96 w-72 bg-blue-200 flex flex-col gap-2 mt-24 mx-auto rounded-xl p-4'>

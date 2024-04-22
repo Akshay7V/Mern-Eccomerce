@@ -43,16 +43,17 @@ export const signIn = async (req, res) => {
       return res.status(401).json({ message: "Incorrect password" });
     }
 
+    // Set user data in a cookie
+    res.cookie('user', JSON.stringify({ email: user.email, id: user._id }), { httpOnly: true, maxAge: 3600000 }); // Expires in 1 hour
+
+    // Send user data in response
     const { email: mail, _id: id } = user;
-    const token = jwt.sign({ id: user._id, mail }, process.env.JWT_SECRET);
-    res
-      .status(200)
-      .cookie("access_token", token, { httpOnly: true })
-      .json({ email: mail, id });
+    res.status(200).json({ email: mail, id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
+
 
 export const adminSignIn = async (req, res) => {
   const { email, password } = req.body;
@@ -74,11 +75,11 @@ export const adminSignIn = async (req, res) => {
     }
 
     const { email: mail, _id: id } = user;
-    const token = jwt.sign({ id: user._id, mail }, process.env.JWT_SECRET);
-    res
-      .status(200)
-      .cookie("access_token", token, { httpOnly: true })
-      .json({ email: mail, id });
+    // Set admin data in a cookie
+    res.cookie('user', JSON.stringify({ email: user.email, id: user._id, isAdmin: true }), { httpOnly: true, maxAge: 3600000 }); // Expires in 1 hour
+
+    // Send admin data in response
+    res.status(200).json({ email: mail, id });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
