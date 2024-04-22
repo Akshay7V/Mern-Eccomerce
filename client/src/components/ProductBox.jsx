@@ -3,7 +3,9 @@ import Rating from '@mui/material/Rating';
 import { Link } from 'react-router-dom';
 
 
-export default function ProductBox({ }) {
+export default function ProductBox({ product }) {
+    const { name, price, rating, ratingCount } = product;
+
     return (
         <div className='w-72 flex flex-col gap-2 rounded-md shadow-md border border-gray-300 h-96'>
             <div className="h-1/2 w-full">
@@ -11,11 +13,15 @@ export default function ProductBox({ }) {
             </div>
             <div className="flex justify-evenly">
                 <div className="flex gap-2">
-                    <Rating name="read-only" value={2} readOnly />
+                    <Rating name="read-only" value={rating} readOnly />
                 </div>
-                <div className="text-sm">344</div>
+                <div className="text-sm">{ratingCount}</div>
             </div>
-            <div className="truncate font-medium">Apple Iphone 15 pro</div>
+            <div className="truncate font-medium">{name}</div>
+            <div className="">{price.toLocaleString('en-IN', {
+                style: 'currency',
+                currency: 'INR'
+            })}</div>
             <Link className='w-1/2 text-sm font-semibold self-center bg-black text-white rounded-md shadow-md px-4 py-3'>Add To Cart</Link>
         </div>
     )
