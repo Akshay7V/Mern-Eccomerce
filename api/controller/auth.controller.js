@@ -46,7 +46,7 @@ export const signIn = async (req, res) => {
     }
 
     // Set user data in a cookie
-    res.cookie('user', JSON.stringify({ email: user.email, id: user._id }), { httpOnly: true, maxAge: 3600000 }); // Expires in 1 hour
+    res.cookie('user', JSON.stringify({ email: user.email, id: user._id }), { httpOnly: true, maxAge: 3600000 * 24 * 7 }); // Expires in 1 hour
 
     // Send user data in response
     const { email: mail, _id: id } = user;
@@ -55,6 +55,17 @@ export const signIn = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+export const signOut = (req, res) => {
+  try {
+      // Clear the 'user' cookie
+      res.clearCookie('user');
+      res.status(200).json({ message: 'Sign-out successful' });
+  } catch (error) {
+      res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 
 
 export const adminSignIn = async (req, res) => {
