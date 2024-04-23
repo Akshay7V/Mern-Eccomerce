@@ -8,25 +8,29 @@ export default function Signin() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch('/api/user/signin', {
-        headers: {
-          'Content-type': 'application/json'
-        },
-        method: 'POST',
-        body: JSON.stringify({ email, password })
-      });
-      
-      const data = await res.json(); // Await the JSON parsing
-      
-      if(res.ok){
-        // Redirect only if the response is OK
+        const res = await fetch('/api/user/signin', {
+            headers: {
+                'Content-type': 'application/json'
+            },
+            method: 'POST',
+            body: JSON.stringify({ email, password })
+        });
+
+        if (!res.ok) {
+            // Handle non-OK responses
+            const errorData = await res.json();
+            throw new Error(errorData.message);
+        }
+
+        const data = await res.json();
+        const { email: mail, id } = data;
+        localStorage.setItem('user', JSON.stringify({ email: mail, id }));
         window.location.href = '/'; // Redirect to the '/' route
-      }
-      console.log(data);
     } catch (error) {
-      console.log(error);
+        console.error('Error:', error.message);
     }
-}
+};
+
 
   return (
     <div className="w-screen flex justify-center items-center">

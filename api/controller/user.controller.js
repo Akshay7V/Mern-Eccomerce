@@ -1,6 +1,7 @@
 import { Cart } from '../models/cart.model.js';
 import { Product } from '../models/product.model.js';
 
+
 export const getAllProducts = async (req, res) => {
     try {
         const products = await Product.find();
@@ -10,19 +11,34 @@ export const getAllProducts = async (req, res) => {
     }
 };
 
-export const getProduct = async (req, res) => {
+
+
+export const getCartItems = async (req, res) => {
     try {
-        const { productIds } = req.body;
-        if (productIds) {
-            const products = await Product.find({ _id: { $in: productIds } });
-            res.json({ products });
-        } else {
-            res.json({ message: 'Product id is required!' })
+        const userData = req.cookies.user;
+        if (!userData) {
+            return res.status(401).json({ message: 'User unauthorized' });
         }
+
+        const { id } = JSON.parse(userData);
+        if (!id) {
+            return res.status(401).json({ message: 'User unauthorized' });
+        }
+
+        const cart = await Cart.findOne({ userId: id });
+        if (!cart) {
+            return res.status(404).json({ message: 'User cart not found' });
+        }
+
+        const cartProducts = await Product.find({ _id: { $in: cart.cart } });
+        res.json({ cartProducts });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        console.error('Error:', error.message);
+        res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+
 
 
 export const addToCart = async (req, res) => {
