@@ -28,6 +28,17 @@ const useCartProducts = (user) => {
 const CartPage = () => {
   const { user } = useContext(UserContext);
   const cartProducts = useCartProducts(user);
+  let [totalAmount, setTotalAmount] = useState(0);
+
+  useEffect(() => {
+    // Calculate total amount when cart products change
+    if (cartProducts.length > 0) {
+      const total = cartProducts.reduce((acc, item) => acc + item.price, 0);
+      setTotalAmount(total);
+    } else {
+      setTotalAmount(0);
+    }
+  }, [cartProducts]);
 
   return (
     <>
@@ -36,22 +47,29 @@ const CartPage = () => {
         <h1 className="text-center text-3xl p-5">Your Cart</h1>
         <div className="w-full flex flex-col justify-around items-center gap-3 p-3">
           {cartProducts.length > 0 ? (
-            cartProducts.map((item, i) => (
-              <div key={i} className="bg-white flex items-center justify-evenly w-3/4 rounded-lg border border-gray-300 shadow-lg h-80 p-3">
-                <div className="flex flex-col gap-2">
-                  <img className="w-40" src="https://m.media-amazon.com/images/I/81+GIkwqLIL._SL1500_.jpg" alt="Product Image" />
-                  <div className="capitalize font-semibold text-center">{item.name}</div>
+            cartProducts.map((item, i) => {
+              return (
+                <div key={i} className="bg-white flex items-center justify-evenly w-3/4 rounded-lg border border-gray-300 shadow-lg h-80 p-3">
+                  <div className="flex flex-col gap-2">
+                    <img className="w-40" src="https://m.media-amazon.com/images/I/81+GIkwqLIL._SL1500_.jpg" alt="Product Image" />
+                    <div className="capitalize font-semibold text-center">{item.name}</div>
+                  </div>
+                  <div className="font-semibold">{item.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
+                  <Rating name="read-only" value={item.rating} readOnly />
                 </div>
-                <div className="font-semibold">{item.price.toLocaleString('en-IN', { style: 'currency', currency: 'INR' })}</div>
-                <Rating name="read-only" value={item.rating} readOnly />
-              </div>
-            ))
+              )
+            })
           ) : (
             <div className="bg-white w-1/2 max-h-96 flex flex-col gap-2 items-center justify-center m-auto mt-20 rounded-md shadow-md p-4">
               <img className="h-72" src="https://cdn.dribbble.com/users/3956545/screenshots/15463522/media/e763f7a49068517dd5fc3b6dc5006df8.jpg?resize=1000x750&vertical=center" alt="" />
               <h2 className="text-xl font-semibold">Empty Cart</h2>
               <Link className="text-center" to={'/'}>Back to Home</Link>
             </div>
+          )}
+
+
+          {cartProducts.length > 0 && (
+            <div className="text-xl text-center font-semibold mt-5">Total Amount {totalAmount.toLocaleString('en-IN', {style: 'currency', currency: 'INR'})}</div> 
           )}
 
           {cartProducts.length > 0 && (
